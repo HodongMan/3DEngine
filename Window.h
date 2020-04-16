@@ -20,6 +20,9 @@ public:
 	virtual void	onUpdate( void ) noexcept;
 	virtual void	onDestroy( void ) noexcept;
 
+	RECT			getWindowRect( void ) const noexcept;
+	void			setHWND( HWND hwnd ) noexcept;
+
 protected:
 
 	HWND _hwnd;

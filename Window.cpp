@@ -11,6 +11,8 @@ LRESULT CALLBACK WndProc( HWND hwnd, UINT msg,  WPARAM wParam, LPARAM lParam )
 			auto* const window = reinterpret_cast< Window* const >( params->lpCreateParams );
 
 			SetWindowLongPtr( hwnd, GWLP_USERDATA, reinterpret_cast< LONG_PTR >( window ) );
+			
+			window->setHWND( hwnd );
 			window->onCreate();	
 		}
 		break;
@@ -108,13 +110,13 @@ void Window::broadcast( void ) noexcept
 {
 	MSG message;
 
+	onUpdate();
+
 	while ( PeekMessage( &message, NULL, 0, 0, PM_REMOVE ) )
 	{
 		TranslateMessage( &message );
 		DispatchMessage( &message );
 	}
-
-	onUpdate();
 }
 
 bool Window::isValid( void ) const noexcept
@@ -135,4 +137,17 @@ void Window::onUpdate( void ) noexcept
 void Window::onDestroy( void ) noexcept
 {
 	_isValid = false;
+}
+
+RECT Window::getWindowRect( void ) const noexcept
+{
+	RECT rect;
+	GetClientRect( _hwnd, &rect );
+
+	return rect;
+}
+
+void Window::setHWND( HWND hwnd ) noexcept
+{
+	_hwnd = hwnd;
 }

@@ -16,6 +16,15 @@
     <ClCompile Include="WindowApplicationManager.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="GraphicsManager.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="SwapChain.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceContext.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -25,6 +34,15 @@
       <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="WindowApplicationManager.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsManager.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="SwapChain.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceContext.h">
       <Filter>Include</Filter>
     </ClInclude>
   </ItemGroup>

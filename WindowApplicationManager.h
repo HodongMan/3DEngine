@@ -2,6 +2,8 @@
 
 #include "Window.h"
 
+class SwapChain;
+
 
 class WindowApplicationManager : public Window
 {
@@ -13,4 +15,7 @@ public:
 	virtual	void		onCreate( void ) noexcept override;
 	virtual void		onUpdate( void ) noexcept override;
 	virtual void		onDestroy( void ) noexcept override;
+
+private:
+	SwapChain*			_swapChain;
 };
