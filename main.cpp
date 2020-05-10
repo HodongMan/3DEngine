@@ -1,7 +1,7 @@
 #include "WindowApplicationManager.h"
 
 
-int main()
+int main( void )
 {
 	WindowApplicationManager manager;
 

@@ -17,6 +17,11 @@
 #include <assert.h>
 
 // DirectX includes
+
+#pragma comment(lib, "d3d11.lib")
+#pragma comment(lib, "dxgi.lib")
+#pragma comment(lib, "d3dcompiler.lib")
+
 #include <d3d11_1.h>
 #include <d3dCompiler.h>
 
