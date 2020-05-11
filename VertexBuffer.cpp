@@ -54,13 +54,20 @@ bool VertexBuffer::load( void* vertices, const UINT vertexSize , const UINT list
 
 bool VertexBuffer::release( void ) noexcept
 {
-	_layout->Release();
-	_buffer->Release();
+	if ( nullptr != _layout )
+	{
+		_layout->Release();
+	}
 
+	if ( nullptr != _buffer )
+	{
+		_buffer->Release();
+	}
+	
 	return true;
 }
 
-UINT VertexBuffer::getSizeVertexList(void) const noexcept
+UINT VertexBuffer::getSizeVertexList( void ) const noexcept
 {
 	return _listSize;
 }

@@ -4,6 +4,7 @@
 #include "SwapChain.h"
 #include "VertexBuffer.h"
 
+
 DeviceContext::DeviceContext( ID3D11DeviceContext* deviceContext )
 	: _deviceContext{ deviceContext }
 {
@@ -50,13 +51,19 @@ void DeviceContext::drawTriangleList( const UINT vertexCount, const UINT vertexI
 	_deviceContext->Draw( vertexCount, vertexIndex );
 }
 
+void DeviceContext::drawTriangleStrip( const UINT vertexCount, const UINT vertexIndex ) noexcept
+{
+	_deviceContext->IASetPrimitiveTopology( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP );
+	_deviceContext->Draw( vertexCount, vertexIndex );
+}
+
 void DeviceContext::setViewportSize( const UINT width, const UINT height ) noexcept
 {
 	D3D11_VIEWPORT viewPort;
-	viewPort.Width			= width;
-	viewPort.Height			= height;
+	viewPort.Width			= static_cast<float>( width );
+	viewPort.Height			= static_cast<float>( height );
 	viewPort.MinDepth		= 0.0f;
-	viewPort.MaxDepth		= 0.0f;
+	viewPort.MaxDepth		= 1.0f;
 
 	_deviceContext->RSSetViewports( 1, &viewPort );
 }

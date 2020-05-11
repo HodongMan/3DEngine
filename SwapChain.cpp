@@ -5,6 +5,8 @@
 
 SwapChain::SwapChain( void )
 	: _swapChain{ nullptr }
+	, _renderTargetView{ nullptr }
+	, _depthStancilView{ nullptr }
 {
 
 }
@@ -40,7 +42,11 @@ bool SwapChain::initialize( HWND hwnd, const UINT width, const UINT height ) noe
 	}
 
 	ID3D11Texture2D* textureBuffer = nullptr;
-	_swapChain->GetBuffer( 0, __uuidof( ID3D11Texture2D ), (void**)&textureBuffer );
+	hr = _swapChain->GetBuffer( 0, __uuidof( ID3D11Texture2D ), (void**)&textureBuffer );
+	if ( true == FAILED( hr ) )
+	{
+		return false;
+	}
 
 	hr = device->CreateRenderTargetView( textureBuffer, NULL, &_renderTargetView );
 	if ( true == FAILED( hr ) )

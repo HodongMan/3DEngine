@@ -20,12 +20,12 @@ LRESULT CALLBACK WndProc( HWND hwnd, UINT msg,  WPARAM wParam, LPARAM lParam )
 		{
 			auto* const window = reinterpret_cast< Window* const >( GetWindowLongPtr( hwnd, GWLP_USERDATA ) );
 			window->onDestroy();
-			PostQuitMessage( 0 );
+			::PostQuitMessage( 0 );
 		}
 		break;
 	default:
 		{
-			return DefWindowProc( hwnd, msg, wParam, lParam );
+			return ::DefWindowProc( hwnd, msg, wParam, lParam );
 		}
 		break;
 	}
@@ -142,7 +142,7 @@ void Window::onDestroy( void ) noexcept
 RECT Window::getWindowRect( void ) const noexcept
 {
 	RECT rect;
-	GetClientRect( _hwnd, &rect );
+	::GetClientRect( _hwnd, &rect );
 
 	return rect;
 }

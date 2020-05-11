@@ -20,6 +20,8 @@ struct Vertex
 
 
 WindowApplicationManager::WindowApplicationManager( void )
+	: _swapChain{ nullptr }
+	, _vertexBuffer{ nullptr }
 {
 
 }
@@ -36,14 +38,12 @@ void WindowApplicationManager::onCreate( void ) noexcept
 	GraphicsManager::getInstance()->initialize();
 	
 	_swapChain = GraphicsManager::getInstance()->createSwapChain();
-	if ( nullptr == _swapChain )
+
+	RECT rect = getWindowRect();
+	if ( false == _swapChain->initialize( _hwnd, rect.right - rect.left, rect.bottom - rect.top ) )
 	{
 		return;
 	}
-
-	RECT rect = getWindowRect();
-
-	_swapChain->initialize( _hwnd, rect.right - rect.left, rect.bottom - rect.top );
 
 	Vertex list[] =
 	{
@@ -62,24 +62,24 @@ void WindowApplicationManager::onCreate( void ) noexcept
 
 	GraphicsManager::getInstance()->createShaders();
 
-	void* shaderByteCode = nullptr;
-	UINT shaderSize = 0;
+	void* shaderByteCode	= nullptr;
+	UINT shaderSize			= 0;
 	GraphicsManager::getInstance()->getShaderBufferAndSize( &shaderByteCode, &shaderSize );
 
-	_vertexBuffer->load( list, sizeof (Vertex), listSize, shaderByteCode, shaderSize );
+	_vertexBuffer->load( list, sizeof( Vertex ), listSize, shaderByteCode, shaderSize );
 }
 
 void WindowApplicationManager::onUpdate( void ) noexcept
 {
 	Window::onUpdate();
-	GraphicsManager::getInstance()->getDeviceContext()->clearRenderTargetColor( _swapChain, 0, 0.3f,0.4f, 1);
+	GraphicsManager::getInstance()->getDeviceContext()->clearRenderTargetColor( _swapChain, 0, 0.3f, 0.4f, 1 );
 	
 	const RECT rc = getWindowRect();
 	GraphicsManager::getInstance()->getDeviceContext()->setViewportSize( rc.right - rc.left, rc.bottom - rc.top );
 	GraphicsManager::getInstance()->setShaders();
 	GraphicsManager::getInstance()->getDeviceContext()->setVertexBuffer( _vertexBuffer );
 
-	GraphicsManager::getInstance()->getDeviceContext()->drawTriangleList( _vertexBuffer->getSizeVertexList(), 0);
+	GraphicsManager::getInstance()->getDeviceContext()->drawTriangleStrip( _vertexBuffer->getSizeVertexList(), 0);
 	_swapChain->present( true );
 }
 

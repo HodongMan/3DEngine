@@ -27,7 +27,7 @@ bool GraphicsManager::initialize( void ) noexcept
 
 	const UINT driverCount			= _ARRAYSIZE( driverTypes );
 	const UINT featureLevelCount	= _ARRAYSIZE( featureLevels );
-	HRESULT hr;
+	HRESULT hr						= 0;
 
 	for ( UINT ii = 0; ii < driverCount; ++ii )
 	{
@@ -55,6 +55,26 @@ bool GraphicsManager::initialize( void ) noexcept
 
 bool GraphicsManager::release( void ) noexcept
 {
+	if ( nullptr != _vertexShader )
+	{
+		_vertexShader->Release();
+	}
+
+	if ( nullptr != _pixelShader )
+	{
+		_pixelShader->Release();
+	}
+
+	if ( nullptr != _vsblob )
+	{
+		_vsblob->Release();
+	}
+
+	if ( nullptr != _psblob )
+	{
+		_psblob->Release();
+	}
+
 	_dxgiFactory->Release();
 	_dxgiAdapter->Release();
 	_dxgiDevice->Release();
@@ -62,7 +82,6 @@ bool GraphicsManager::release( void ) noexcept
 	_deviceContext->release();
 	_device->Release();
 	
-
 	return true;
 }
 
@@ -91,8 +110,10 @@ VertexBuffer * GraphicsManager::createVertexBuffer( void ) const noexcept
 bool GraphicsManager::createShaders( void ) noexcept
 {
 	ID3DBlob* errblob = nullptr;
-	D3DCompileFromFile( L"./shader.fx", nullptr, nullptr, "vsmain", "vs_5_0", NULL, NULL, &_vsblob, &errblob );
-	D3DCompileFromFile( L"./shader.fx", nullptr, nullptr, "psmain", "ps_5_0", NULL, NULL, &_psblob, &errblob );
+
+	D3DCompileFromFile( L"shader.fx", nullptr, nullptr, "vsmain", "vs_5_0", NULL, NULL, &_vsblob, &errblob );
+	D3DCompileFromFile( L"shader.fx", nullptr, nullptr, "psmain", "ps_5_0", NULL, NULL, &_psblob, &errblob );
+	
 	_device->CreateVertexShader( _vsblob->GetBufferPointer(), _vsblob->GetBufferSize(), nullptr, &_vertexShader );
 	_device->CreatePixelShader( _psblob->GetBufferPointer(), _psblob->GetBufferSize(), nullptr, &_pixelShader );
 	
@@ -106,7 +127,7 @@ bool GraphicsManager::setShaders( void ) noexcept
 	return true;
 }
 
-void GraphicsManager::getShaderBufferAndSize(void ** bytecode, UINT * size) const noexcept
+void GraphicsManager::getShaderBufferAndSize( void ** bytecode, UINT * size ) const noexcept
 {
 	*bytecode		= _vsblob->GetBufferPointer();
 	*size			= static_cast<UINT>( _vsblob->GetBufferSize() ); 

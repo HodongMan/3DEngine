@@ -12,11 +12,13 @@ public:
 
 
 	bool						clearRenderTargetColor( SwapChain* swapChain, const float red, const float green, const float blue, const float alpha ) noexcept;
-	bool						release( void ) noexcept;
 
 	bool						setVertexBuffer( VertexBuffer* vertexBuffer ) noexcept;
 	void						drawTriangleList( const UINT vertexCount, const UINT vertexIndex ) noexcept;
+	void						drawTriangleStrip( const UINT vertexCount, const UINT vertexIndex ) noexcept;
 	void						setViewportSize( const UINT width, const UINT height ) noexcept;
+
+	bool						release( void ) noexcept;
 
 private:
 

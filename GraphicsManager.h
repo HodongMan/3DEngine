@@ -27,23 +27,22 @@ public:
 private:
 	GraphicsManager( void );
 
-	friend class SwapChain;
-	friend class VertexBuffer;
-
 private:
 	ID3D11Device*			_device;
 	DeviceContext*			_deviceContext;
+	D3D_FEATURE_LEVEL		_featureLevel;
 
 	IDXGIDevice*			_dxgiDevice;
 	IDXGIAdapter*			_dxgiAdapter;
 	IDXGIFactory*			_dxgiFactory;
-	
-	D3D_FEATURE_LEVEL		_featureLevel;
-
 	ID3D11DeviceContext*	_d3d11DeviceContext;
+
 	ID3DBlob*				_vsblob;
 	ID3DBlob*				_psblob;
 	ID3D11VertexShader*		_vertexShader;
 	ID3D11PixelShader*		_pixelShader;
-	
+
+
+	friend class SwapChain;
+	friend class VertexBuffer;
 };
