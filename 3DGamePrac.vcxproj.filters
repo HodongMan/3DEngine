@@ -33,6 +33,12 @@
     <ClCompile Include="main.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="VertexShader.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="PixelShader.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -56,9 +62,18 @@
     <ClInclude Include="VertexBuffer.h">
       <Filter>Include</Filter>
     </ClInclude>
+    <ClInclude Include="VertexShader.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="PixelShader.h">
+      <Filter>Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="shader.fx">
+    <FxCompile Include="VertexShader.hlsl">
+      <Filter>shader</Filter>
+    </FxCompile>
+    <FxCompile Include="PixelShader.hlsl">
       <Filter>shader</Filter>
     </FxCompile>
   </ItemGroup>

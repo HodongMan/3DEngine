@@ -4,6 +4,8 @@
 
 class SwapChain;
 class VertexBuffer;
+class VertexShader;
+class PixelShader;
 
 
 class WindowApplicationManager : public Window
@@ -20,4 +22,6 @@ public:
 private:
 	SwapChain*			_swapChain;
 	VertexBuffer*		_vertexBuffer;
+	VertexShader*		_vertexShader;
+	PixelShader*		_pixelShader;
 };

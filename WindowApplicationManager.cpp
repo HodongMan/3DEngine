@@ -5,6 +5,9 @@
 #include "SwapChain.h"
 #include "DeviceContext.h"
 #include "VertexBuffer.h"
+#include "VertexShader.h"
+#include "PixelShader.h"
+
 
 struct Vector3
 {
@@ -47,9 +50,10 @@ void WindowApplicationManager::onCreate( void ) noexcept
 
 	Vertex list[] =
 	{
-		{ -0.5f,-0.5f,0.0f },
-		{ 0.0f,0.5f,0.0f },
-		{ 0.5f,-0.5f,0.0f }
+		{ -0.5f, -0.5f, 0.0f},
+		{ -0.5f, 0.5f, 0.0f},
+		{ 0.5f, -0.5f, 0.0f },
+		{ 0.5f, 0.5f, 0.0f}
 	};
 
 	_vertexBuffer	= GraphicsManager::getInstance()->createVertexBuffer();
@@ -58,15 +62,22 @@ void WindowApplicationManager::onCreate( void ) noexcept
 		return;
 	}
 
-	const UINT listSize = _ARRAYSIZE( list );
-
-	GraphicsManager::getInstance()->createShaders();
+	const UINT listSize		= _ARRAYSIZE( list );
 
 	void* shaderByteCode	= nullptr;
-	UINT shaderSize			= 0;
-	GraphicsManager::getInstance()->getShaderBufferAndSize( &shaderByteCode, &shaderSize );
-
+	size_t shaderSize		= 0;
+	GraphicsManager::getInstance()->compileVertexShader( L"VertexShader.hlsl", "vsmain", &shaderByteCode, &shaderSize );
+	_vertexShader = GraphicsManager::getInstance()->createVertexShader( shaderByteCode, shaderSize );
 	_vertexBuffer->load( list, sizeof( Vertex ), listSize, shaderByteCode, shaderSize );
+
+	GraphicsManager::getInstance()->releaseCompiledShader();
+
+	bool isOk = GraphicsManager::getInstance()->compilePixelShader( L"PixelShader.hlsl", "psmain", &shaderByteCode, &shaderSize );
+	
+	_pixelShader = GraphicsManager::getInstance()->createPixelShader( shaderByteCode, shaderSize );
+	_vertexBuffer->load( list, sizeof( Vertex ), listSize, shaderByteCode, shaderSize );
+
+	GraphicsManager::getInstance()->releaseCompiledShader();
 }
 
 void WindowApplicationManager::onUpdate( void ) noexcept
@@ -76,7 +87,9 @@ void WindowApplicationManager::onUpdate( void ) noexcept
 	
 	const RECT rc = getWindowRect();
 	GraphicsManager::getInstance()->getDeviceContext()->setViewportSize( rc.right - rc.left, rc.bottom - rc.top );
-	GraphicsManager::getInstance()->setShaders();
+
+	GraphicsManager::getInstance()->getDeviceContext()->setVertexShader( _vertexShader );
+	GraphicsManager::getInstance()->getDeviceContext()->setPixelShader( _pixelShader );
 	GraphicsManager::getInstance()->getDeviceContext()->setVertexBuffer( _vertexBuffer );
 
 	GraphicsManager::getInstance()->getDeviceContext()->drawTriangleStrip( _vertexBuffer->getSizeVertexList(), 0);
@@ -89,6 +102,9 @@ void WindowApplicationManager::onDestroy( void ) noexcept
 
 	_vertexBuffer->release();
 	_swapChain->release();
+
+	_vertexShader->release();
+	_pixelShader->release();
 
 	GraphicsManager::getInstance()->release();
 }

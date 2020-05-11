@@ -2,6 +2,8 @@
 
 class SwapChain;
 class VertexBuffer;
+class VertexShader;
+class PixelShader;
 
 class DeviceContext
 {
@@ -17,6 +19,9 @@ public:
 	void						drawTriangleList( const UINT vertexCount, const UINT vertexIndex ) noexcept;
 	void						drawTriangleStrip( const UINT vertexCount, const UINT vertexIndex ) noexcept;
 	void						setViewportSize( const UINT width, const UINT height ) noexcept;
+
+	void						setVertexShader( const VertexShader* vertexShader ) noexcept;
+	void						setPixelShader( const PixelShader* pixelShader ) noexcept;
 
 	bool						release( void ) noexcept;
 
