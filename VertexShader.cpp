@@ -17,7 +17,7 @@ VertexShader::~VertexShader( void )
 
 void VertexShader::release( void ) noexcept
 {
-	_vertexShader->Release();
+	_vertexShader->Release(); 
 }
 
 bool VertexShader::initialize( const void * shaderByteCode, const size_t shaderByteCodeSize ) noexcept

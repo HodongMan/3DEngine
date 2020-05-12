@@ -7,7 +7,7 @@ int main( void )
 
 	if ( false == manager.init() )
 	{
-		MessageBox( nullptr, L"An error has occured", L"An error has occured", MB_OK );
+		MessageBox( nullptr, "An error has occured", "An error has occured", MB_OK );
 		return false;
 	}
 

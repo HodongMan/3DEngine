@@ -13,7 +13,7 @@ LRESULT CALLBACK WndProc( HWND hwnd, UINT msg,  WPARAM wParam, LPARAM lParam )
 			SetWindowLongPtr( hwnd, GWLP_USERDATA, reinterpret_cast< LONG_PTR >( window ) );
 			
 			window->setHWND( hwnd );
-			window->onCreate();	
+			window->onCreate();
 		}
 		break;
 	case WM_DESTROY:
@@ -46,6 +46,7 @@ Window::~Window( void )
 
 bool Window::init( void ) noexcept
 {
+
 	WNDCLASSEX wc{};
 
 	wc.cbSize			= sizeof( WNDCLASSEX );
@@ -54,10 +55,10 @@ bool Window::init( void ) noexcept
 	wc.hIcon			= LoadIcon( NULL, IDI_APPLICATION );
 	wc.hIconSm			= LoadIcon( NULL, IDI_APPLICATION );
 	wc.hInstance		= GetModuleHandle( nullptr );
-	wc.lpszClassName	= L"3d Games";
+	wc.lpszClassName	= "3d Games";
 	wc.lpfnWndProc		= &WndProc;
 
-	wc.lpszMenuName		= L"";
+	wc.lpszMenuName		= "";
 	wc.style			= NULL;
 
 	if ( false == RegisterClassEx( &wc ) )
@@ -72,8 +73,8 @@ bool Window::init( void ) noexcept
 	const auto height	= rect.bottom - rect.top;
 
 	_hwnd = CreateWindowEx( WS_EX_OVERLAPPEDWINDOW,
-							L"3d Games", 
-							L"3d Application", 
+							"3d Games", 
+							"3d Application", 
 							WS_OVERLAPPEDWINDOW, 
 							CW_USEDEFAULT, 
 							CW_USEDEFAULT,

@@ -3,6 +3,7 @@
 #include "DeviceContext.h"
 #include "SwapChain.h"
 #include "VertexBuffer.h"
+#include "ConstantBuffer.h"
 #include "VertexShader.h"
 #include "PixelShader.h"
 
@@ -10,6 +11,7 @@
 DeviceContext::DeviceContext( ID3D11DeviceContext* deviceContext )
 	: _deviceContext{ deviceContext }
 {
+
 }
 
 DeviceContext::~DeviceContext( void )
@@ -37,7 +39,7 @@ bool DeviceContext::release( void ) noexcept
 	return true;
 }
 
-bool DeviceContext::setVertexBuffer( VertexBuffer* vertexBuffer ) noexcept
+bool DeviceContext::setVertexBuffer( const VertexBuffer* vertexBuffer ) noexcept
 {
 	const UINT stride = vertexBuffer->_vertexSize;
 	const UINT offset = 0;
@@ -78,4 +80,14 @@ void DeviceContext::setVertexShader( const VertexShader* vertexShader) noexcept
 void DeviceContext::setPixelShader( const PixelShader* pixelShader ) noexcept
 {
 	_deviceContext->PSSetShader( pixelShader->_pixelShader, nullptr, 0 );
+}
+
+void DeviceContext::setConstantBuffer( const VertexShader* vertexShader, const ConstantBuffer* buffer ) noexcept
+{
+	_deviceContext->VSSetConstantBuffers( 0, 1, &buffer->_buffer );
+}
+
+void DeviceContext::setConstantBuffer( const PixelShader* pixelShader, const ConstantBuffer* buffer ) noexcept
+{
+	_deviceContext->VSSetConstantBuffers( 0, 1, &buffer->_buffer );
 }

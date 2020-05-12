@@ -4,6 +4,7 @@
 #include "SwapChain.h"
 #include "DeviceContext.h"
 #include "VertexBuffer.h"
+#include "ConstantBuffer.h"
 #include "VertexShader.h"
 #include "PixelShader.h"
 
@@ -97,6 +98,11 @@ DeviceContext * GraphicsManager::getDeviceContext( void ) const noexcept
 VertexBuffer * GraphicsManager::createVertexBuffer( void ) const noexcept
 {
 	return new VertexBuffer();
+}
+
+ConstantBuffer * GraphicsManager::createConstantBuffer(void) const noexcept
+{
+	return new ConstantBuffer();
 }
 
 VertexShader* GraphicsManager::createVertexShader( const void * shaderByteCode, const size_t shaderByteCodeSize ) noexcept

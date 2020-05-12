@@ -4,6 +4,7 @@
 
 class SwapChain;
 class VertexBuffer;
+class ConstantBuffer;
 class VertexShader;
 class PixelShader;
 
@@ -24,4 +25,5 @@ private:
 	VertexBuffer*		_vertexBuffer;
 	VertexShader*		_vertexShader;
 	PixelShader*		_pixelShader;
+	ConstantBuffer*		_constantBuffer;
 };

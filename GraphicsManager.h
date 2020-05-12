@@ -4,6 +4,7 @@
 class SwapChain;
 class DeviceContext;
 class VertexBuffer;
+class ConstantBuffer;
 class VertexShader;
 class PixelShader;
 
@@ -22,6 +23,7 @@ public:
 	SwapChain*				createSwapChain( void ) const noexcept;
 	DeviceContext*			getDeviceContext( void ) const noexcept;
 	VertexBuffer*			createVertexBuffer( void ) const noexcept;
+	ConstantBuffer*			createConstantBuffer( void ) const noexcept;
 	VertexShader*			createVertexShader( const void* shaderByteCode, const size_t shaderByteCodeSize ) noexcept;
 	PixelShader*			createPixelShader( const void* shaderByteCode, const size_t shaderByteCodeSize ) noexcept;
 
@@ -50,6 +52,7 @@ private:
 
 	friend class SwapChain;
 	friend class VertexBuffer;
+	friend class ConstantBuffer;
 	friend class VertexShader;
 	friend class PixelShader;
 };

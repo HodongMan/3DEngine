@@ -25,9 +25,9 @@ bool VertexBuffer::load( void* vertices, const UINT vertexSize , const UINT list
 	bufferDesc.CPUAccessFlags		= 0;
 	bufferDesc.MiscFlags			= 0;
 
-	D3D11_SUBRESOURCE_DATA	initData = {};
+	D3D11_SUBRESOURCE_DATA initData = {};
 
-	initData.pSysMem = vertices;
+	initData.pSysMem				= vertices;
 
 	_vertexSize						= vertexSize;
 	_listSize						= listSize;
@@ -39,10 +39,13 @@ bool VertexBuffer::load( void* vertices, const UINT vertexSize , const UINT list
 
 	const D3D11_INPUT_ELEMENT_DESC layout[] = 
 	{ 
-		"POSITION", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 
+		{ "POSITION", 0,  DXGI_FORMAT_R32G32B32_FLOAT, 0, 0,D3D11_INPUT_PER_VERTEX_DATA ,0 },
+		{ "POSITION", 1,  DXGI_FORMAT_R32G32B32_FLOAT, 0, 12,D3D11_INPUT_PER_VERTEX_DATA ,0 },
+		{ "COLOR", 0,  DXGI_FORMAT_R32G32B32_FLOAT, 0, 24,D3D11_INPUT_PER_VERTEX_DATA ,0 },
+		{ "COLOR", 1,  DXGI_FORMAT_R32G32B32_FLOAT, 0, 36,D3D11_INPUT_PER_VERTEX_DATA ,0 }
 	};
 	
-	const UINT layoutSize = _ARRAYSIZE( layout );
+	const UINT layoutSize = ARRAYSIZE( layout );
 
 	if ( FAILED( GraphicsManager::getInstance()->_device->CreateInputLayout( layout, layoutSize, shaderByteCode, byteShaderSize, &_layout ) ) )
 	{
