@@ -6,35 +6,41 @@
 #include "DeviceContext.h"
 #include "VertexBuffer.h"
 #include "ConstantBuffer.h"
+#include "IndexBuffer.h"
 #include "VertexShader.h"
 #include "PixelShader.h"
 
-
-struct Vector3
-{
-	float x;
-	float y;
-	float z;
-};
-
 struct Vertex
 {
-	Vector3 position;
-	Vector3 position1;
-	Vector3 color;
-	Vector3 color1;
+	Vector3		_position;
+	Vector3		_color;
+	Vector3		_color1;
 };
 
 __declspec( align( 16 ) )
 struct Constant
 {
-	unsigned int _time;
+	Matrix4			_world;
+	Matrix4			_view;
+	Matrix4			_projection;
+	unsigned int	_time;
 };
 
 
 WindowApplicationManager::WindowApplicationManager( void )
 	: _swapChain{ nullptr }
 	, _vertexBuffer{ nullptr }
+	, _vertexShader{ nullptr }
+	, _pixelShader{ nullptr }
+	, _constantBuffer{ nullptr }
+	, _indexBuffer{ nullptr }
+	, _oldDelta{ 0 }
+	, _newDelta{ 0 }
+	, _deltaTime{ 0.0f }
+	, _deltaPos{ 0.0f }
+	, _deltaScale{ 0.0f }
+	, _deltaRotation{ 0.0f }
+
 {
 
 }
@@ -43,6 +49,42 @@ WindowApplicationManager::~WindowApplicationManager( void )
 {
 
 }
+
+void WindowApplicationManager::updateQuadPosition( void ) noexcept
+{
+	Constant constant;
+	constant._time = ::GetTickCount();
+
+	_deltaPos += _deltaTime / 10.0f;
+	if ( 1.0f < _deltaPos )
+	{
+		_deltaPos = 0;
+	}
+
+	_deltaScale += _deltaTime / 0.55f;
+
+	Matrix4 tempMatrix;
+	constant._world.setScale( Vector3( 1, 1, 1 ) );
+
+	tempMatrix.setIdentity();
+	tempMatrix.setRotationZ( _deltaScale );
+	constant._world *= tempMatrix;
+
+	tempMatrix.setIdentity();
+	tempMatrix.setRotationY( _deltaScale );
+	constant._world *= tempMatrix;
+
+	tempMatrix.setIdentity();
+	tempMatrix.setRotationX( _deltaScale );
+	constant._world *= tempMatrix;
+
+	constant._view.setIdentity();
+	constant._projection.setOrthoLH ( ( getWindowRect().right - getWindowRect().left ) / 300.0f,
+									  ( getWindowRect().bottom - getWindowRect().top ) / 300.0f,
+									  -4.0f,
+									  4.0f );
+	_constantBuffer->update( GraphicsManager::getInstance()->getImmediateDeviceContext(), &constant );
+}	
 
 void WindowApplicationManager::onCreate( void ) noexcept
 {

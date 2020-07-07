@@ -24,3 +24,9 @@
 
 #include <d3d11.h>
 #include <d3dCompiler.h>
+
+
+// Math library
+
+#include "Matrix.h"
+#include "Vector.h"
