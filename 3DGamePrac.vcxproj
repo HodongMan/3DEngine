@@ -19,64 +19,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ConstantBuffer.cpp" />
-    <ClCompile Include="DeviceContext.cpp" />
     <ClCompile Include="GraphicsManager.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="PixelShader.cpp" />
-    <ClCompile Include="SwapChain.cpp" />
-    <ClCompile Include="VertexBuffer.cpp" />
-    <ClCompile Include="VertexShader.cpp" />
     <ClCompile Include="Window.cpp" />
-    <ClCompile Include="WindowApplicationManager.cpp" />
+    <ClCompile Include="WindowApplication.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ConstantBuffer.h" />
-    <ClInclude Include="DeviceContext.h" />
     <ClInclude Include="GraphicsManager.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="PixelShader.h" />
-    <ClInclude Include="SwapChain.h" />
-    <ClInclude Include="VertexBuffer.h" />
-    <ClInclude Include="VertexShader.h" />
     <ClInclude Include="Window.h" />
-    <ClInclude Include="WindowApplicationManager.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="PixelShader.hlsl">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0_level_9_3</ShaderModel>
-      <EnableDebuggingInformation Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</EnableDebuggingInformation>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0_level_9_3</ShaderModel>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0_level_9_3</ShaderModel>
-      <EnableDebuggingInformation Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</EnableDebuggingInformation>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0_level_9_3</ShaderModel>
-      <CompileD2DCustomEffect Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</CompileD2DCustomEffect>
-      <CompileD2DCustomEffect Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</CompileD2DCustomEffect>
-      <CompileD2DCustomEffect Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</CompileD2DCustomEffect>
-      <CompileD2DCustomEffect Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</CompileD2DCustomEffect>
-    </FxCompile>
-    <FxCompile Include="VertexShader.hlsl">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
-      <CompileD2DCustomEffect Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</CompileD2DCustomEffect>
-      <CompileD2DCustomEffect Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</CompileD2DCustomEffect>
-      <CompileD2DCustomEffect Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</CompileD2DCustomEffect>
-      <CompileD2DCustomEffect Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</CompileD2DCustomEffect>
-    </FxCompile>
+    <ClInclude Include="WindowApplication.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

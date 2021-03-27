@@ -12,73 +12,29 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Window.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="WindowApplicationManager.cpp">
+    <ClCompile Include="WindowApplication.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="GraphicsManager.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="SwapChain.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="DeviceContext.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="VertexBuffer.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="VertexShader.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="PixelShader.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="ConstantBuffer.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="pch.h">
+    <ClInclude Include="WindowApplication.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="WindowApplicationManager.h">
+    <ClInclude Include="pch.h">
       <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="GraphicsManager.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="SwapChain.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="DeviceContext.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="VertexBuffer.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="VertexShader.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="PixelShader.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="ConstantBuffer.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="PixelShader.hlsl">
-      <Filter>shader</Filter>
-    </FxCompile>
-    <FxCompile Include="VertexShader.hlsl">
-      <Filter>shader</Filter>
-    </FxCompile>
   </ItemGroup>
 </Project>

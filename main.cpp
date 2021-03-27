@@ -1,20 +1,15 @@
-#include "WindowApplicationManager.h"
+#include "WindowApplication.h"
 
 
-int main( void )
+int main()
 {
-	WindowApplicationManager manager;
-
-	if ( false == manager.init() )
+	WindowApplication application;
+	if ( true == application.initialize())
 	{
-		MessageBox( nullptr, "An error has occured", "An error has occured", MB_OK );
-		return false;
+		while ( true == application.isValid() )
+		{
+			application.broadcast();
+		}
 	}
 
-	while ( true == manager.isValid() )
-	{
-		manager.broadcast();
-	}
-
-	return 0;
 }
